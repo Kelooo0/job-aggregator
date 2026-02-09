@@ -11,10 +11,13 @@ def scrape_data(URL):
 
         if count == 0:
             print('No job offers found for input keyword')
+        elif count == 1:
+            print('1 job offer found')
         else:
             print(f'{count} job offers found')
         jobs_list_html = []
         for i in range(count):
             jobs_list_html.append(jobs.nth(i).inner_html())
         browser.close()
+
         return jobs_list_html
