@@ -3,8 +3,8 @@ from core.logger import log_info
 from core.config import build_url
 from services.service import JobService
 def main():
-    log_info('Job aggregator started')
     create_logfile()
+    log_info('Job aggregator started')
     log_info('Created log file')
     print("Enter job title / company name / keyword:")
     keyword = input('>')
