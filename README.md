@@ -37,6 +37,7 @@ Script scrapes data, parses it, appends data to database, appends data to todays
     - Linux/macOS: source .venv/bin/activate
 
 3. Install dependencies from `requirements.txt`
+    - pip install -r requirements.txt
 
 # HOW TO RUN
 
