@@ -34,7 +34,7 @@ Script scrapes data, parses it, appends data to database, appends data to todays
     - Windows: .venv\Scripts\activate
 
     - Linux/macOS : python3 -m venv .venv
-    - Linux/macOS: source venv/bin/activate
+    - Linux/macOS: source .venv/bin/activate
 
 3. Install dependencies from `requirements.txt`
 
