@@ -16,3 +16,6 @@ migrations/
 *.log
 *.pot
 *.pyc
+data/
+logs/
+reports/
