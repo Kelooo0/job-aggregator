@@ -1,6 +1,6 @@
-# JOB TRACKER
+# JOB AGGREGATOR
 
-Job Tracker uses weworkremotely.com website to scrape job offers using keyword provided by the user.
+Job Aggregator uses weworkremotely.com website to scrape job offers using keyword provided by the user.
 Script scrapes data, parses it, appends data to database, appends data to todays snapshot as CSV file and leaves a logfile.
 !! Use script responsibly and introduce delays between requests to not cause disruptions
 
@@ -31,9 +31,9 @@ Script scrapes data, parses it, appends data to database, appends data to todays
 
 2. Create and activate virtual environment at projects folder
     - Windows: python -m venv .venv
-    - Linux/macOS : python3 -m venv .venv
-    <br>
     - Windows: .venv\Scripts\activate
+
+    - Linux/macOS : python3 -m venv .venv
     - Linux/macOS: source venv/bin/activate
 
 3. Install dependencies from `requirements.txt`
