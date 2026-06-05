@@ -1,0 +1,43 @@
+import sys
+
+from core.logger import log
+from ingestion.parser import parse_data
+from ingestion.scraper import scrape_data
+from reporting.report import save_to_csv
+from storage.database import save_to_database
+from storage.models import Job
+
+
+def search_jobs(url):
+    log.info("Scraping data")
+    raw_html = scrape_data(url)
+    log.info("Fetched page content")
+    log.info("Parsing data")
+    job_offers = parse_data(raw_html)
+    log.info("Data parsed properly")
+    jobs = []
+    for job in job_offers:
+        try:
+            job_obj = Job(
+                timestamp=job["timestamp"],
+                title=job["title"],
+                company_name=job["company_name"],
+                headquarters=job["headquarters"],
+                post_date=job["post_date"],
+                categories=job["categories"],
+                offer_url=job["offer_url"],
+            )
+            jobs.append(job_obj)
+        except Exception:
+            log.error("Exception while validating job offers data")
+            continue
+    if not jobs:
+        log.info("No job offers found")
+        sys.exit(0)
+    log.info("Saving new jobs to database")
+    new_jobs = save_to_database(jobs)
+    log.info("Data saved to database correctly")
+    log.info("Saving new jobs to a CSV report")
+    snapshot_path = save_to_csv(new_jobs)
+    log.info("Data saved to CSV report properly")
+    return jobs
