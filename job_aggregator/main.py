@@ -1,6 +1,6 @@
-from core.config import config
-from core.logger import log
-from services.service import search_jobs
+from job_aggregator.core.config import config
+from job_aggregator.core.logger import log
+from job_aggregator.services.service import search_jobs
 
 
 def main():

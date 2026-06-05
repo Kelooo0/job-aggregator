@@ -1,6 +1,6 @@
 import sys
 
-from core.logger import log
+from job_aggregator.core.logger import log
 from playwright.sync_api import sync_playwright
 
 

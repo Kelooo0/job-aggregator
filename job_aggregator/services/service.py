@@ -1,11 +1,11 @@
 import sys
 
-from core.logger import log
-from ingestion.parser import parse_data
-from ingestion.scraper import scrape_data
-from reporting.report import save_to_csv
-from storage.database import save_to_database
-from storage.models import Job
+from job_aggregator.core.logger import log
+from job_aggregator.ingestion.parser import parse_data
+from job_aggregator.ingestion.scraper import scrape_data
+from job_aggregator.reporting.report import save_to_csv
+from job_aggregator.storage.database import save_to_database
+from job_aggregator.storage.models import Job
 
 
 def search_jobs(url):

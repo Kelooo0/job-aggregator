@@ -3,8 +3,8 @@ import os
 import sys
 from datetime import date
 
-from core.config import config
-from core.logger import log
+from job_aggregator.core.config import config
+from job_aggregator.core.logger import log
 
 
 def get_snapshot_name():

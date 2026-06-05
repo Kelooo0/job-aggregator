@@ -2,8 +2,8 @@ import os
 import sqlite3
 import sys
 
-from core.config import Config
-from core.logger import log
+from job_aggregator.core.config import Config
+from job_aggregator.core.logger import log
 
 
 def save_to_database(jobs):

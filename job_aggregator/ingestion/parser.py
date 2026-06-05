@@ -3,8 +3,8 @@ import re
 from datetime import UTC, datetime, timedelta
 
 from bs4 import BeautifulSoup
-from core.config import config
-from core.logger import log
+from job_aggregator.core.config import config
+from job_aggregator.core.logger import log
 
 
 def parse_data(raw_html):

@@ -1,7 +1,7 @@
 import logging
 import os
 
-from core.config import config
+from job_aggregator.core.config import config
 
 
 def logger_setup():
