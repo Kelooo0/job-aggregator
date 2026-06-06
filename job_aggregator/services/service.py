@@ -38,6 +38,6 @@ def search_jobs(url):
     new_jobs = save_to_database(jobs)
     log.info("Data saved to database correctly")
     log.info("Saving new jobs to a CSV report")
-    snapshot_path = save_to_csv(new_jobs)
+    save_to_csv(new_jobs)
     log.info("Data saved to CSV report properly")
     return jobs
