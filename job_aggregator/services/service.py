@@ -29,7 +29,7 @@ def search_jobs(url):
             )
             jobs.append(job_obj)
         except Exception:
-            log.error("Exception while validating job offers data")
+            log.error("An error occured while validating a job offers data")
             continue
     if not jobs:
         log.info("No job offers found")

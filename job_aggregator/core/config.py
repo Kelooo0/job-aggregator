@@ -3,7 +3,7 @@ from pathlib import Path
 
 class Config:
     BASE_URL = "https://weworkremotely.com"
-    BASE_DIR = Path(__file__).resolve().parents[3]
+    BASE_DIR = Path(__file__).resolve().parents[2]
 
     REPORT_FOLDER = BASE_DIR / "reports"
     DATA_FOLDER = BASE_DIR / "data"

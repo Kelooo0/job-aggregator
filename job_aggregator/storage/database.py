@@ -24,9 +24,7 @@ def save_to_database(jobs):
     try:
         offer_urls = cursor.execute("SELECT offer_url FROM job_offers").fetchall()
         existing_urls = {row[0] for row in offer_urls}
-        new_jobs = [
-            j for j in jobs if j.offer_url and j.offer_url not in existing_urls
-        ]
+        new_jobs = [j for j in jobs if j.offer_url and j.offer_url not in existing_urls]
         # new_jobs will be used for saving to CSV report later
         # DB handles duplicates by UNIQUE + OR IGNORE
         for job in jobs:
@@ -42,6 +40,7 @@ def save_to_database(jobs):
                     job.offer_url,
                 ),
             )
+
         conn.commit()
         conn.close()
         return new_jobs

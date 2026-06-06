@@ -1,7 +1,8 @@
 import sys
 
-from job_aggregator.core.logger import log
 from playwright.sync_api import sync_playwright
+
+from job_aggregator.core.logger import log
 
 
 def scrape_data(URL):

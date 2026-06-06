@@ -3,6 +3,7 @@ import re
 from datetime import UTC, datetime, timedelta
 
 from bs4 import BeautifulSoup
+
 from job_aggregator.core.config import config
 from job_aggregator.core.logger import log
 
@@ -53,6 +54,6 @@ def parse_data(raw_html):
             }
             job_offers.append(job_data)
         except Exception:
-            log.error("An error occured while parsing this job offer")
+            log.error("An error occured while parsing a job offer")
             continue
     return job_offers
