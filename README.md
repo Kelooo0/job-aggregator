@@ -4,7 +4,7 @@ Job Aggregator uses weworkremotely.com website to scrape job offers using keywor
 Script scrapes data, parses it, appends data to database, appends data to todays snapshot as CSV file and leaves a logfile.
 !! Use script responsibly and introduce delays between requests to not cause disruptions
 
-# HOW IT WORKS
+## HOW IT WORKS
 
 1. User enters keyword
 2. Script konfigures the URL
@@ -14,32 +14,67 @@ Script scrapes data, parses it, appends data to database, appends data to todays
 6. Appends data to the database at `data\database.db`
 7. Leaves a logfile at `logs\app.log`
 
-# Structure
-- `main.py` - Controls program
-- `scraper.py` - Scrapes data
-- `parser.py` - Parses data
-- `database.py` - Appends data to database
-- `report.py` - Creates CSV report
-- `data\` - Holds `database.db` file
-- `logs\` - Holds `app.log` file
-- `reports\` - Holds snapshot CSV file
+## Showcase
 
-# Installation
+![Showcase 1](assets/img/sc_1.PNG)
+![Showcase 2](assets/img/sc_2.PNG)
 
-1. Clone repository files
-    - git clone https://github.com/Kelooo0/job-aggregator.git
+## Installation
 
-2. Create and activate virtual environment at projects folder
-    - Windows: python -m venv .venv
-    - Windows: .venv\Scripts\activate
+### 1. Clone the repository
 
-    - Linux/macOS : python3 -m venv .venv
-    - Linux/macOS: source .venv/bin/activate
+- git clone https://github.com/Kelooo0/job-aggregator.git
+- cd job-aggregator
 
-3. Install dependencies from `requirements.txt`
-    - pip install -r requirements.txt
+### 2. Install virtual environment
 
-# HOW TO RUN
+- Windows: python -m venv .venv
+- Linux/macOS: python3 -m venv .venv
 
-- cd src/job-aggregator
-- Run main.py using dedicated terminal
+### 3. Activate virtual environment
+
+- Windows: .venv\Scripts\activate
+- Linux/macOS: source .venv/bin/activate
+
+### 4. Install dependencies
+
+- Run in root folder: pip install -r requirements.txt && python -m playwright install chromium
+
+### 6. How to run
+
+- Windows: python run.py
+- Linux/macOS: python3 run.py
+
+## Project structure
+
+```text
+job-aggregator/
+├── assets/                     # Project documentation folder
+├── data/                       # Database file folder
+├── job_aggregator/             # Main app package
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── config.py           # App configuration file
+│   │   └── logger.py           # Logging setup
+│   ├── ingestion/
+│   │   ├── __init__.py
+│   │   ├── parser.py           # Parses html and returns clean job offers
+│   │   └── scraper.py          # Scrapes raw page html
+│   ├── reporting/
+│   │   ├── __init__.py
+│   │   └── report.py           # Generates CSV reports
+│   ├── services/
+│   │   ├── __init__.py
+│   │   └── service.py          # Coordination of functions
+│   ├── storage/
+│   │   ├── __init__.py
+│   │   ├── database.py         # Saves new job offers to database
+│   │   └── models.py           # Holds dataclasses
+│   ├── __init__.py
+│   └── main.py                 # Main logic operator
+├── logs/                       # Holds app log file
+├── reports/                    # Holds CSV reports
+├── .gitignore
+├── README.md
+├── requirements.txt
+└── run.py                      # Main app entry point
