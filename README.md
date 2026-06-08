@@ -16,8 +16,8 @@ Script scrapes data, parses it, appends data to database, appends data to todays
 
 ## Showcase
 
-![Showcase 1](assets/img/sc_1.PNG)
-![Showcase 2](assets/img/sc_2.PNG)
+![Showcase 1](assets/img/aggregator1.PNG)
+![Showcase 2](assets/img/aggregator2.PNG)
 
 ## Installation
 
