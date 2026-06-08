@@ -5,7 +5,7 @@ from datetime import UTC, datetime, timedelta
 from bs4 import BeautifulSoup
 
 from job_aggregator.core.config import config
-from job_aggregator.core.logger import log
+from loguru import logger
 
 
 def parse_data(raw_html):
@@ -13,6 +13,7 @@ def parse_data(raw_html):
 
     bs = BeautifulSoup(raw_html, "html.parser")
     jobs_html = bs.select("section.jobs ul li.new-listing-container")
+    logger.debug("Parsing job offers")
     for card in jobs_html:
         try:
             link = card.select_one("a.listing-link--unlocked")
@@ -54,6 +55,7 @@ def parse_data(raw_html):
             }
             job_offers.append(job_data)
         except Exception:
-            log.error("An error occured while parsing a job offer")
+            logger.error("An error occured while parsing a job offer")
+            logger.opt(exception=True).debug("Exception traceback:")
             continue
     return job_offers

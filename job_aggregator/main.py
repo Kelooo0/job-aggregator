@@ -1,17 +1,26 @@
+import sys
+
+from loguru import logger
+
 from job_aggregator.core.config import config
-from job_aggregator.core.logger import log
 from job_aggregator.services.service import search_jobs
 
 
 def main():
-    log.debug("App start")
+    logger.remove()
+    logger.add(
+        sys.stderr, level="INFO", format="<level>{level: <8}</level> | {message}"
+    )
+    logger.add(config.LOG_FILE, level="DEBUG", mode="w")
+
+    logger.debug("App start")
     print("Enter job title / company name / keyword:")
     keyword = input(">")
     url = config.build_url(keyword)
-    log.debug(f"Built URL: {url}")
-    log.info(f"Searching for jobs matching '{keyword}'")
+    logger.debug(f"Built URL: {url}")
+    logger.info(f"Searching for jobs matching '{keyword}'")
     jobs = search_jobs(url)
-    log.info("Printing found jobs")
+    logger.info("Printing found jobs")
     for idx, job in enumerate(jobs):
         print(f"""
 
@@ -26,7 +35,7 @@ def main():
         """)
     job_count = len(jobs)
     print(f"{job_count} job offers found")
-    log.debug("App end")
+    logger.debug("App end")
 
 
 if __name__ == "__main__":

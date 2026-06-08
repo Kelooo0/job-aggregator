@@ -3,12 +3,12 @@ import sqlite3
 import sys
 
 from job_aggregator.core.config import Config
-from job_aggregator.core.logger import log
+from loguru import logger
 
 
 def save_to_database(jobs):
     os.makedirs(Config.DATA_FOLDER, exist_ok=True)
-    log.debug("Connecting to database and creating tables")
+    logger.debug("Connecting to database and creating tables")
     try:
         conn = sqlite3.connect(Config.DATABASE_FILE, isolation_level=None)
         cursor = conn.cursor()
@@ -16,11 +16,12 @@ def save_to_database(jobs):
             "CREATE TABLE IF NOT EXISTS job_offers (id INTEGER PRIMARY KEY,timestamp TEXT,title TEXT, company_name TEXT, headquarters TEXT, post_date TEXT, categories TEXT, offer_url TEXT UNIQUE )"
         )
     except Exception:
-        log.exception(
+        logger.error(
             "An error occured while connecting to database and creating tables"
         )
+        logger.opt(exception=True).debug("Exception traceback:")
         sys.exit(1)
-    log.debug("Appending data to database")
+    logger.debug("Appending data to database")
     try:
         offer_urls = cursor.execute("SELECT offer_url FROM job_offers").fetchall()
         existing_urls = {row[0] for row in offer_urls}
@@ -45,5 +46,6 @@ def save_to_database(jobs):
         conn.close()
         return new_jobs
     except Exception:
-        log.exception("An error occured while appending data to database")
+        logger.error("An error occured while appending data to database")
+        logger.opt(exception=True).debug("Exception traceback:")
         sys.exit(1)

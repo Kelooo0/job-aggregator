@@ -4,21 +4,21 @@ import sys
 from datetime import date
 
 from job_aggregator.core.config import config
-from job_aggregator.core.logger import log
+from loguru import logger
 
 
 def get_snapshot_name():
-    log.debug("Setting up snapshotname")
+    logger.debug("Setting up snapshotname")
     return f"snapshot_{date.today().isoformat()}.csv"
 
 
 def check_csv():
-    log.debug("Checking if CSV report already exists")
+    logger.debug("Checking if CSV report already exists")
     os.makedirs(config.REPORT_FOLDER, exist_ok=True)
     filename = get_snapshot_name()
     file_path = config.REPORT_FOLDER / filename
     if not file_path.exists():
-        log.debug("Creating CSV report file")
+        logger.debug("Creating CSV report file")
         with open(file_path, "w", newline="", encoding="utf-8") as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(
@@ -37,7 +37,7 @@ def check_csv():
 
 def save_to_csv(new_jobs):
     file_path = check_csv()
-    log.debug("Saving data to a CSV report")
+    logger.debug("Saving data to a CSV report")
     try:
         with open(file_path, "a", newline="", encoding="utf-8") as csv_file:
             csv_writer = csv.writer(csv_file)
@@ -55,5 +55,6 @@ def save_to_csv(new_jobs):
                 )
         return file_path
     except Exception:
-        log.exception("An error occured while saving data to CSV report")
+        logger.error("An error occured while saving data to CSV report")
+        logger.opt(exception=True).debug("Exception traceback:")
         sys.exit(1)
