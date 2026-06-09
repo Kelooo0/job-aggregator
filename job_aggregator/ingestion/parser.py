@@ -1,11 +1,12 @@
 import json
 import re
+import sys
 from datetime import UTC, datetime, timedelta
 
 from bs4 import BeautifulSoup
+from loguru import logger
 
 from job_aggregator.core.config import config
-from loguru import logger
 
 
 def parse_data(raw_html):
@@ -13,6 +14,9 @@ def parse_data(raw_html):
 
     bs = BeautifulSoup(raw_html, "html.parser")
     jobs_html = bs.select("section.jobs ul li.new-listing-container")
+    if not jobs_html:
+        logger.info("No job offers found")
+        sys.exit(0)
     logger.debug("Parsing job offers")
     for card in jobs_html:
         try:

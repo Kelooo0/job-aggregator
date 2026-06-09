@@ -1,6 +1,5 @@
-import sys
-
 from loguru import logger
+
 from job_aggregator.ingestion.parser import parse_data
 from job_aggregator.ingestion.scraper import scrape_data
 from job_aggregator.reporting.report import save_to_csv
@@ -32,9 +31,6 @@ def search_jobs(url):
             logger.error("An error occured while validating a job offers data")
             logger.opt(exception=True).debug("Exception traceback:")
             continue
-    if not jobs:
-        logger.info("No job offers found")
-        sys.exit(0)
     logger.info("Saving new jobs to database")
     new_jobs = save_to_database(jobs)
     logger.info("Data saved to database correctly")
